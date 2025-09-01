@@ -1,0 +1,5 @@
+{
+  "delhi": {"annual_average": 617, "monthly_distribution": [18, 20, 15, 10, 13, 70, 237, 235, 113, 17, 5, 8]},
+  "mumbai": {"annual_average": 2422, "monthly_distribution": [3, 2, 2, 2, 20, 523, 868, 553, 306, 93, 18, 4]},
+  "bangalore": {"annual_average": 859, "monthly_distribution": [5, 7, 14, 46, 119, 80, 110, 147, 194, 180, 58, 18]}
+}
