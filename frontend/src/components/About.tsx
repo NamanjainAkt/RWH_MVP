@@ -22,14 +22,14 @@ const aboutItems = [
 const About = () => {
   return (
     <SectionWrapper id="about" title="Your Partner in Water Sustainability">
-      <div className="grid md:grid-cols-3 gap-8">
+      <div className="grid md:grid-cols-3 gap-8 backdrop-blur-xl">
         {aboutItems.map((item, index) => (
-          <div key={index} className="p-8 bg-surface rounded-2xl border border-border text-center flex flex-col items-center">
+          <div key={index} className="p-8 bg-black/40 backdrop-blur-xl rounded-2xl border border-border text-center flex flex-col items-center">
             <div className="mb-4 bg-primary/10 p-3 rounded-full">
               <item.icon className="w-8 h-8 text-primary" />
             </div>
-            <h3 className="text-xl font-bold text-text mb-2">{item.title}</h3>
-            <p className="text-text-secondary">{item.description}</p>
+            <h3 className="text-xl font-bold text-white mb-2">{item.title}</h3>
+            <p className="text-white/80">{item.description}</p>
           </div>
         ))}
       </div>

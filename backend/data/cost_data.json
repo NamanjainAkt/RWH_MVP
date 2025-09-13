@@ -1,0 +1,26 @@
+{
+  "delhi": {
+    "material_multiplier": 1.0,
+    "labor_multiplier": 1.0
+  },
+  "mumbai": {
+    "material_multiplier": 1.3,
+    "labor_multiplier": 1.2
+  },
+  "bangalore": {
+    "material_multiplier": 1.1,
+    "labor_multiplier": 0.9
+  },
+  "durg": {
+    "material_multiplier": 0.9,
+    "labor_multiplier": 0.9
+  },
+  "raipur": {
+    "material_multiplier": 1.0,
+    "labor_multiplier": 1.0
+  },
+  "pune": {
+    "material_multiplier": 1.2,
+    "labor_multiplier": 1.1
+  }
+}

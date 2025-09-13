@@ -1,0 +1,38 @@
+{
+  "delhi": {
+    "depth_to_water": 8.5,
+    "aquifer_type": "unconfined",
+    "water_quality": "moderate",
+    "recharge_potential": "medium"
+  },
+  "mumbai": {
+    "depth_to_water": 5.2,
+    "aquifer_type": "confined",
+    "water_quality": "good",
+    "recharge_potential": "high"
+  },
+  "bangalore": {
+    "depth_to_water": 11.3,
+    "aquifer_type": "unconfined",
+    "water_quality": "moderate",
+    "recharge_potential": "medium"
+  },
+  "durg": {
+    "depth_to_water": -11.3,
+    "aquifer_type": "Semi-Confined",
+    "water_quality": "Unknown",
+    "recharge_potential": "medium"
+  },
+  "raipur": {
+    "depth_to_water": -6.44,
+    "aquifer_type": "Semi-Confined",
+    "water_quality": "Unknown",
+    "recharge_potential": "medium"
+  },
+  "pune": {
+    "depth_to_water": 6.5,
+    "aquifer_type": "Unconfined",
+    "water_quality": "Unknown",
+    "recharge_potential": "Medium"
+  }
+}

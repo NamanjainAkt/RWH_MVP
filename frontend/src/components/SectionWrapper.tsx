@@ -20,7 +20,7 @@ const SectionWrapper = ({ children, id, title, subtitle }: SectionWrapperProps) 
   };
 
   return (
-    <section id={id} className="py-20 sm:py-32">
+    <section id={id} className="py-20 sm:py-32 backdrop-blur-xl">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           ref={ref}
@@ -30,7 +30,7 @@ const SectionWrapper = ({ children, id, title, subtitle }: SectionWrapperProps) 
           transition={{ duration: 0.8, ease: 'easeOut' }}
           className="max-w-3xl mx-auto text-center mb-12 md:mb-16"
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-text tracking-tight">
+          <h2 className="text-3xl md:text-4xl font-bold text-indigo-400 tracking-tight">
             {title}
           </h2>
           {subtitle && (

@@ -10,11 +10,11 @@ const References = () => {
   return (
     <SectionWrapper id="references" title="Powered by Credible Data">
       <div className="flex flex-wrap justify-center items-center gap-12 md:gap-16">
-        <p className="font-semibold text-text-secondary">IMD</p>
-        <p className="font-semibold text-text-secondary">CGWB</p>
-        <p className="font-semibold text-text-secondary">Ministry of Jal Shakti</p>
+        <p className="font-semibold text-white">IMD</p>
+        <p className="font-semibold text-white">CGWB</p>
+        <p className="font-semibold text-white">Ministry of Jal Shakti</p>
       </div>
-      <p className="text-center text-sm text-text-secondary mt-8">
+      <p className="text-center text-white/80 text-sm mt-8">
         We use official, up-to-date data from India's leading meteorological and water resource agencies to ensure the highest accuracy.
       </p>
     </SectionWrapper>

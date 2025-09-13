@@ -10,7 +10,7 @@ import Footer from '../components/Footer';
 
 function Home() {
   return (
-    <>
+    <div className='bg-black/60 bg-cover rounded-lg'>
       <Header />
       <main>
         <Hero />
@@ -22,7 +22,7 @@ function Home() {
         <References />
       </main>
       <Footer />
-    </>
+    </div>
   );
 }
 
