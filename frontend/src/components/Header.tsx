@@ -52,13 +52,13 @@ const Header = () => {
               Get Started
             </a>
           </div>
-          <div className="md:hidden">
-            <button onClick={() => setIsMenuOpen(!isMenuOpen)}>
-              <Menu className="w-6 h-6 text-text" />
+          <div className={`md:hidden w-2 h-2 flex items-center mx-2 px-2 mr-8`}>
+            <button className='border-none' onClick={() => setIsMenuOpen(!isMenuOpen)}>
+              <Menu className="w-6 h-6 text-white" />
             </button>
           </div>
         </div>
-      </div>
+      </div> 
       <AnimatePresence>
         {isMenuOpen && (
           <motion.div
@@ -71,11 +71,13 @@ const Header = () => {
               <div className="flex justify-between items-center mb-4">
                 <a href="#" className="flex items-center gap-2">
                   <Droplets className="w-8 h-8 text-primary" />
-                  <span className="text-xl font-bold text-text">AquaGenius</span>
+                  <span className="text-xl font-bold text-black">AquaGenius</span>
                 </a>
-                <button onClick={() => setIsMenuOpen(false)}>
-                  <X className="w-6 h-6 text-text" />
+                <div className='w-2 h-2 flex items-center mx-2 px-2 mr-8'>
+                  <button onClick={() => setIsMenuOpen(false)}>
+                  <X className="w-6 h-6 text-black border-none " />
                 </button>
+                </div>
               </div>
               <nav className="flex flex-col gap-4">
                 {navLinks.map((link) => (
