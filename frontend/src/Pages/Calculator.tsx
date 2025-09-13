@@ -91,7 +91,7 @@ function Calculator() {
 
     const fetchWeatherData = async (location: string) => {
         try {
-            const response = await fetch(`http://localhost:8000/weather/${location}`);
+            const response = await fetch(`https://rwh-mvp.onrender.com/weather/${location}`);
             if (response.ok) {
                 const data = await response.json();
                 setWeatherData(data);
@@ -103,7 +103,7 @@ function Calculator() {
 
     const fetchRainfallData = async (location: string) => {
         try {
-            const response = await fetch(`http://localhost:8000/rainfall/${location}`);
+            const response = await fetch(`https://rwh-mvp.onrender.com/rainfall/${location}`);
             if (response.ok) {
                 const data = await response.json();
                 setRainfallData(data);
@@ -115,7 +115,7 @@ function Calculator() {
 
     const fetchGroundwaterData = async (location: string) => {
         try {
-            const response = await fetch(`http://localhost:8000/groundwater/${location}`);
+            const response = await fetch(`https://rwh-mvp.onrender.com/groundwater/${location}`);
             if (response.ok) {
                 const data = await response.json();
                 setGroundwaterData(data);
@@ -130,7 +130,7 @@ function Calculator() {
         setLoading(true);
 
         try {
-            const response = await fetch('http://localhost:8000/assess', {
+            const response = await fetch('https://rwh-mvp.onrender.com/assess', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
