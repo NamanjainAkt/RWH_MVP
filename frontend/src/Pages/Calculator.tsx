@@ -1,6 +1,5 @@
 // App.tsx
 import { useState, ChangeEvent, FormEvent } from 'react';
-import { LiquidChrome } from '../components/LiquidChrome';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, BarChart, Bar } from 'recharts';
 import './Calculator.css';
 
@@ -226,14 +225,6 @@ function Calculator() {
 
     return (
         <div className="App">
-            <div style={{ width: '100%', height: '1600px', position: 'absolute', top: 0, left: 0, zIndex: -1 }}>
-                <LiquidChrome
-                    baseColor={[0.05, 0.4, 0.4]}
-                    speed={0.5}
-                    amplitude={0.6}
-                    interactive={false}
-                />
-            </div>
             <header className="App-header">
                 <h1>Rainwater Harvesting Assessment</h1>
             </header>

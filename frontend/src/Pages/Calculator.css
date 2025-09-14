@@ -50,7 +50,7 @@ body {
     max-width: 1200px;
     margin: 0 auto;
     padding: var(--spacing-2xl);
-    background: var(--secondary-bg);
+    background: white;
     border-radius: var(--border-radius-xl);
     box-shadow: var(--shadow-hard);
     border: 1px solid var(--border-color);
@@ -86,21 +86,20 @@ body {
     transform: translateX(-50%);
     width: 120px;
     height: 3px;
-    background: linear-gradient(90deg, transparent, var(--accent-color), transparent);
+    background: linear-gradient(90deg, transparent, black, transparent);
     border-radius: 2px;
 }
 
 .App-header h1 {
     font-size: clamp(2rem, 4vw, 3rem);
     font-weight: 700;
-    background: linear-gradient(135deg, #ffffff 0%, var(--accent-color) 50%, #00ff9d 100%);
+    background: linear-gradient(180deg,black,gray);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
     margin-bottom: var(--spacing-sm);
     letter-spacing: -0.02em;
     z-index: 10;
-    text-shadow: 1px 1px #0a0a0ad9;
 }
 
 /* Container for all content */
@@ -464,13 +463,13 @@ button:disabled {
     backdrop-filter: blur(15px);
     border: 1px solid var(--border-color);
     border-radius: var(--border-radius-lg);
-    padding: var(--spacing-xl);
-    margin: var(--spacing-xl) 0;
     color: white;
     box-shadow: var(--shadow-soft);
     transition: var(--transition);
     position: relative;
     z-index: 10;
+    width: 100%;
+    min-width: max-content;
 }
 
 .chart-container:hover {
