@@ -55,7 +55,7 @@ async def get_locations():
 # New endpoint for current weather data
 @app.get("/weather/{location}")
 async def get_weather(location: str):
-    if OWM_API_KEY == "YOUR_API_KEY_HERE":
+    if OWM_API_KEY == "4965edceb05bcfcf83e8cb551b6a6ee1":
         raise HTTPException(status_code=500, detail="OpenWeatherMap API key is not set. Please set the OWM_API_KEY environment variable.")
     try:
         # Map your location names to city names for OpenWeatherMap
@@ -63,7 +63,7 @@ async def get_weather(location: str):
             "delhi": "Delhi,IN",
             "mumbai": "Mumbai,IN",
             "bangalore": "Bangalore,IN"
-            # Add more mappings as needed
+            
         }
         
         city = city_mapping.get(location.lower(), location)

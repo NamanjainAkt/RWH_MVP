@@ -94,7 +94,7 @@ function Calculator() {
 
     const fetchWeatherData = async (location: string) => {
         try {
-            const response = await fetch(`/${location}`);
+            const response = await fetch(`${API_BASE_URL}/weather/${location}`);
             if (response.ok) {
                 const data = await response.json();
                 setWeatherData(data);
