@@ -4,6 +4,9 @@ import { LiquidChrome } from '../components/LiquidChrome';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, BarChart, Bar } from 'recharts';
 import './Calculator.css';
 
+const API_BASE_URL = 'https://rwh-mvp.onrender.com';
+// const API_BASE_URL = 'http://localhost:8000';
+
 interface FormData {
     location: string;
     roof_area: string;
@@ -91,7 +94,7 @@ function Calculator() {
 
     const fetchWeatherData = async (location: string) => {
         try {
-            const response = await fetch(`https://rwh-mvp.onrender.com/weather/${location}`);
+            const response = await fetch(`/${location}`);
             if (response.ok) {
                 const data = await response.json();
                 setWeatherData(data);
@@ -103,7 +106,7 @@ function Calculator() {
 
     const fetchRainfallData = async (location: string) => {
         try {
-            const response = await fetch(`https://rwh-mvp.onrender.com/rainfall/${location}`);
+            const response = await fetch(`${API_BASE_URL}/rainfall/${location}`);
             if (response.ok) {
                 const data = await response.json();
                 setRainfallData(data);
@@ -115,7 +118,7 @@ function Calculator() {
 
     const fetchGroundwaterData = async (location: string) => {
         try {
-            const response = await fetch(`https://rwh-mvp.onrender.com/groundwater/${location}`);
+            const response = await fetch(`${API_BASE_URL}/groundwater/${location}`);
             if (response.ok) {
                 const data = await response.json();
                 setGroundwaterData(data);
@@ -130,7 +133,7 @@ function Calculator() {
         setLoading(true);
 
         try {
-            const response = await fetch('https://rwh-mvp.onrender.com/assess', {
+            const response = await fetch(`${API_BASE_URL}/assess`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -220,39 +223,6 @@ function Calculator() {
         );
     };
 
-    // GroundwaterStatus component - Fixed the type issue
-    const GroundwaterStatus = ({ status }: { status: string | undefined }) => {
-        let statusColor = '';
-        let statusMessage = '';
-    
-        switch (status?.toLowerCase()) {
-            case 'safe':
-                statusColor = 'green';
-                statusMessage = 'Groundwater levels are healthy and sustainable.';
-                break;
-            case 'semi-critical':
-                statusColor = 'orange';
-                statusMessage = 'Groundwater extraction should be monitored carefully.';
-                break;
-            case 'critical':
-                statusColor = 'red';
-                statusMessage = 'Groundwater extraction exceeds recharge rates. Conservation needed.';
-                break;
-            default:
-                statusColor = 'gray';
-                statusMessage = 'Status information not available.';
-        }
-    
-        return (
-            <div className="groundwater-status" style={{ borderColor: statusColor }}>
-                <h3>Groundwater Status</h3>
-                <div className="status-indicator" style={{ backgroundColor: statusColor }}>
-                    <span>{status || 'Unknown'}</span>
-                </div>
-                <p>{statusMessage}</p>
-            </div>
-        );
-    };
 
     return (
         <div className="App">
@@ -322,7 +292,7 @@ function Calculator() {
                             </label>
 
                             <label>
-                                Daily Water Usage (Liters):
+                                Daily Water Usage (Liters) per Person:
                                 <input
                                     type="number"
                                     name="water_usage"
@@ -356,7 +326,7 @@ function Calculator() {
                         
                         {rainfallData && <RainfallChart data={rainfallData} />}
                         {groundwaterData && <GroundwaterChart data={groundwaterData} />}
-                        {groundwaterData && <GroundwaterStatus status={groundwaterData.status} />}
+                    
                     </>
                 ) : (
                     <div className="results">
