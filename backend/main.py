@@ -18,7 +18,7 @@ app.add_middleware(
 
 # OpenWeatherMap API key - you'll need to get your own API key from openweathermap.org
 # For production, use environment variables instead of hardcoding
-OWM_API_KEY = os.getenv("OWM_API_KEY", "4965edceb05bcfcf83e8cb551b6a6ee1")  # Replace with your actual API key
+OWM_API_KEY = "4965edceb05bcfcf83e8cb551b6a6ee1"
 
 # Get the absolute path to the directory containing this script
 script_dir = os.path.dirname(__file__)
@@ -55,42 +55,51 @@ async def get_locations():
 # New endpoint for current weather data
 @app.get("/weather/{location}")
 async def get_weather(location: str):
-    if OWM_API_KEY == "4965edceb05bcfcf83e8cb551b6a6ee1":
-        raise HTTPException(status_code=500, detail="OpenWeatherMap API key is not set. Please set the OWM_API_KEY environment variable.")
     try:
-        # Map your location names to city names for OpenWeatherMap
+        # Add debug logging
+        print(f"Received weather request for location: {location}")
+        
+        if OWM_API_KEY == "4965edceb05bcfcf83e8cb551b6a6ee1":
+            print("Warning: Using default API key")
+            
+        # Updated city mapping
         city_mapping = {
             "delhi": "Delhi,IN",
             "mumbai": "Mumbai,IN",
-            "bangalore": "Bangalore,IN"
-            
+            "bangalore": "Bangalore,IN",
+            "raipur": "Raipur,IN",
+            "pune": "Pune,IN",
+            "durg": "Durg,IN"  # Simplified mapping
         }
         
         city = city_mapping.get(location.lower(), location)
-        
-        # Make request to OpenWeatherMap API
         url = f"https://api.openweathermap.org/data/2.5/weather?q={city}&appid={OWM_API_KEY}&units=metric"
-        response = requests.get(url)
         
-        if response.status_code != 200:
-            raise HTTPException(status_code=response.status_code, detail="Failed to fetch weather data")
-            
+        print(f"Making API request to: {url}")  # Debug log
+        response = requests.get(url, timeout=10)  # Added timeout
+        response.raise_for_status()  # Raise exception for non-200 status codes
+        
         data = response.json()
+        print(f"Received API response: {data}")  # Debug log
         
-        # Extract relevant weather information
         weather_data = {
             "location": location,
             "temperature": data["main"]["temp"],
             "humidity": data["main"]["humidity"],
             "description": data["weather"][0]["description"],
             "icon": data["weather"][0]["icon"],
-            "rainfall": data.get("rain", {}).get("1h", 0),  # Rainfall in last hour if available
+            "rainfall": data.get("rain", {}).get("1h", 0),
             "wind_speed": data["wind"]["speed"],
             "timestamp": data["dt"]
         }
         
         return weather_data
+        
+    except requests.exceptions.RequestException as e:
+        print(f"Network error: {str(e)}")  # Debug log
+        raise HTTPException(status_code=500, detail=f"Network error: {str(e)}")
     except Exception as e:
+        print(f"Error processing weather data: {str(e)}")  # Debug log
         raise HTTPException(status_code=500, detail=str(e))
 
 # New endpoint for historical rainfall data
