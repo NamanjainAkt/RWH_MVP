@@ -22,7 +22,7 @@ const Hero = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: 'easeOut' }}
         >
-          <h1 className="text-4xl md:text-6xl lg:text-7xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-orange-500 to-white tracking-tighter mb-6">
+          <h1 className=" p-4 text-4xl md:text-6xl lg:text-7xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-orange-500 to-white tracking-tighter mb-6">
             {t('heroTitle')}
             <br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-white to-green-600">
