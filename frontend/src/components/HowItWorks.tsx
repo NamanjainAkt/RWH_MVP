@@ -1,27 +1,29 @@
 import { Edit3, Server, FileText } from 'lucide-react';
 import SectionWrapper from './SectionWrapper';
-
-const steps = [
-  {
-    icon: Edit3,
-    title: 'Enter Details',
-    description: 'Provide your location, rooftop area, and surface type. It\'s that simple.',
-  },
-  {
-    icon: Server,
-    title: 'Fetch Data',
-    description: 'Our system instantly pulls localized rainfall and groundwater data from official sources.',
-  },
-  {
-    icon: FileText,
-    title: 'Generate Report',
-    description: 'Receive a comprehensive analysis of your RWH potential, costs, and benefits in seconds.',
-  },
-];
+import { useLanguage } from '../contexts/LanguageContext';
 
 const HowItWorks = () => {
+  const { t } = useLanguage();
+  
+  const steps = [
+    {
+      icon: Edit3,
+      title: t('enterDetails'),
+      description: t('enterDetailsDesc'),
+    },
+    {
+      icon: Server,
+      title: t('fetchData'),
+      description: t('fetchDataDesc'),
+    },
+    {
+      icon: FileText,
+      title: t('generateReport'),
+      description: t('generateReportDesc'),
+    },
+  ];
   return (
-    <SectionWrapper id="how-it-works" title="Get Your Assessment in 3 Easy Steps">
+    <SectionWrapper id="how-it-works" title={t('howItWorksTitle')}>
       <div className="relative">
         <div className="absolute left-1/2 top-12 bottom-12 w-0.5 bg-border hidden md:block" />
         <div className="grid md:grid-cols-3 gap-12">
