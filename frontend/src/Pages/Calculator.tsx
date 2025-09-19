@@ -1,6 +1,8 @@
 // App.tsx
 import { useState, ChangeEvent, FormEvent } from 'react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, BarChart, Bar } from 'recharts';
+import Header from '../components/Header';
+import { useLanguage } from '../contexts/LanguageContext';
 import './Calculator.css';
 
 const API_BASE_URL = 'https://rwh-mvp.onrender.com';
@@ -64,6 +66,7 @@ interface GroundwaterData {
 }
 
 function Calculator() {
+    const { t } = useLanguage();
     const [formData, setFormData] = useState<FormData>({
         location: '',
         roof_area: '',
@@ -144,7 +147,7 @@ function Calculator() {
             setResult(data);
         } catch (error) {
             console.error('Error:', error);
-            alert('Failed to calculate. Please try again.');
+            alert(t('calculationFailed'));
         } finally {
             setLoading(false);
         }
@@ -154,7 +157,7 @@ function Calculator() {
     const LiveWeatherCard = ({ data }: { data: WeatherData }) => {
         return (
             <div className="weather-card">
-                <h3>Current Weather in {data.location}</h3>
+                <h3>{t('currentWeatherIn')} {data.location}</h3>
                 <div className="weather-info">
                     <img 
                         src={`http://openweathermap.org/img/wn/${data.icon}@2x.png`} 
@@ -166,9 +169,9 @@ function Calculator() {
                     </div>
                 </div>
                 <div className="weather-details">
-                    <p>Humidity: {data.humidity}%</p>
-                    <p>Wind: {data.wind_speed} m/s</p>
-                    <p>Rainfall: {data.rainfall} mm</p>
+                    <p>{t('humidity')}: {data.humidity}%</p>
+                    <p>{t('wind')}: {data.wind_speed} m/s</p>
+                    <p>{t('rainfall')}: {data.rainfall} mm</p>
                 </div>
             </div>
         );
@@ -183,12 +186,12 @@ function Calculator() {
 
         return (
             <div className="chart-container">
-                <h3>Monthly Rainfall Distribution</h3>
+                <h3>{t('monthlyRainfallDistribution')}</h3>
                 <ResponsiveContainer width="100%" height={300}>
                     <LineChart data={chartData}>
                         <CartesianGrid strokeDasharray="3 3" />
                         <XAxis dataKey="month" />
-                        <YAxis label={{ value: 'Rainfall (mm)', angle: -90, position: 'insideLeft' }} />
+                        <YAxis label={{ value: t('rainfallMm'), angle: -90, position: 'insideLeft' }} />
                         <Tooltip />
                         <Legend />
                         <Line type="monotone" dataKey="rainfall" stroke="#8884d8" activeDot={{ r: 8 }} />
@@ -207,12 +210,12 @@ function Calculator() {
 
         return (
             <div className="chart-container">
-                <h3>Groundwater Levels (Past 5 Years)</h3>
+                <h3>{t('groundwaterLevels')}</h3>
                 <ResponsiveContainer width="100%" height={300}>
                     <BarChart data={chartData}>
                         <CartesianGrid strokeDasharray="3 3" />
                         <XAxis dataKey="year" />
-                        <YAxis label={{ value: 'Depth (meters)', angle: -90, position: 'insideLeft' }} />
+                        <YAxis label={{ value: t('depthMeters'), angle: -90, position: 'insideLeft' }} />
                         <Tooltip />
                         <Legend />
                         <Bar dataKey="level" fill="#82ca9d" />
@@ -224,10 +227,12 @@ function Calculator() {
 
 
     return (
-        <div className="App">
-            <header className="App-header">
-                <h1>Rainwater Harvesting Assessment</h1>
-            </header>
+        <>
+            <Header />
+            <div className="App mt-20">
+                <header className="App-header">
+                    <h1>{t('rainfallAssessment')}</h1>
+                </header>
 
             <div className="container">
                 {!result ? (
@@ -235,13 +240,13 @@ function Calculator() {
                         {weatherData && <LiveWeatherCard data={weatherData} />}
                         
                         <form onSubmit={handleSubmit} className="form">
-                            <h2>Enter All Details</h2>
+                            <h2>{t('enterAllDetails')}</h2>
 
                             <label>
-                                Location:
+                                {t('location')}:
                                 
                                 <select name="location" value={formData.location} onChange={handleChange}>
-                                    <option value="">Select Location</option>
+                                    <option value="">{t('selectLocation')}</option>
                                     <option value="durg">Durg</option>
                                     <option value="raipur">Raipur</option>
                                     <option value="pune">Pune</option>
@@ -253,7 +258,7 @@ function Calculator() {
 
                             <label>
 
-                                Roof Area (sq ft):
+                                {t('roofArea')}:
                                 
                                 <input
                                     type="number"
@@ -264,16 +269,16 @@ function Calculator() {
                             </label>
 
                             <label>
-                                Roof Type:
+                                {t('roofType')}:
                                 <select name="roof_type" value={formData.roof_type} onChange={handleChange}>
-                                    <option value="concrete">Concrete</option>
-                                    <option value="tile">Tile</option>
-                                    <option value="metal">Metal</option>
+                                    <option value="concrete">{t('concrete')}</option>
+                                    <option value="tile">{t('tile')}</option>
+                                    <option value="metal">{t('metal')}</option>
                                 </select>
                             </label>
 
                             <label>
-                                Number of Residents:
+                                {t('residents')}:
                                 <input
                                     type="number"
                                     name="residents"
@@ -283,7 +288,7 @@ function Calculator() {
                             </label>
 
                             <label>
-                                Daily Water Usage (Liters) per Person:
+                                {t('waterUsage')}:
                                 <input
                                     type="number"
                                     name="water_usage"
@@ -293,25 +298,25 @@ function Calculator() {
                             </label>
 
                             <label>
-                                Soil Type:
+                                {t('soilType')}:
                                 <select name="soil_type" value={formData.soil_type} onChange={handleChange}>
-                                    <option value="sandy">Sandy</option>
-                                    <option value="loamy">Loamy</option>
-                                    <option value="clayey">Clayey</option>
+                                    <option value="sandy">{t('sandy')}</option>
+                                    <option value="loamy">{t('loamy')}</option>
+                                    <option value="clayey">{t('clayey')}</option>
                                 </select>
                             </label>
 
                             <label>
-                                Budget:
+                                {t('budget')}:
                                 <select name="budget" value={formData.budget} onChange={handleChange}>
-                                    <option value="low">Low</option>
-                                    <option value="medium">Medium</option>
-                                    <option value="high">High</option>
+                                    <option value="low">{t('low')}</option>
+                                    <option value="medium">{t('medium')}</option>
+                                    <option value="high">{t('high')}</option>
                                 </select>
                             </label>
 
                             <button className='text-white rounded-md p-4 border-accent border' type="submit" disabled={loading}>
-                                {loading ? 'Calculating...' : 'Get Assessment'}
+                                {loading ? t('calculating') : t('getAssessment')}
                             </button>
                         </form>
                         
@@ -321,18 +326,18 @@ function Calculator() {
                     </>
                 ) : (
                     <div className="results">
-                        <h2>Assessment Results</h2>
+                        <h2>{t('assessmentResults')}</h2>
                         <div className="result-card main-result">
-                            <h3>Harvest Potential</h3>
+                            <h3>{t('harvestPotential')}</h3>
                             <p>
-                                Annual Harvestable Water:{' '}
-                                <strong>{result.harvest_potential.annual_volume.toLocaleString()} liters</strong>
+                                {t('annualHarvestableWater')}:{' '}
+                                <strong>{result.harvest_potential.annual_volume.toLocaleString()} {t('liters')}</strong>
                             </p>
                             
                             {/* Add monthly rainfall chart */}
                             {rainfallData && (
                                 <div className="chart-container">
-                                    <h4>Monthly Harvest Distribution</h4>
+                                    <h4>{t('monthlyHarvestDistribution')}</h4>
                                     <ResponsiveContainer width="100%" height={200}>
                                         <LineChart data={result.harvest_potential.monthly_volumes.map((volume, index) => ({
                                             month: rainfallData.monthly_labels[index],
@@ -350,35 +355,36 @@ function Calculator() {
                         </div>
                     
                         <div className="result-card">
-                            <h3>Recommended Structure</h3>
+                            <h3>{t('recommendedStructure')}</h3>
                             <p>
-                                Type: <strong>{result.structure_design.type}</strong>
+                                {t('type')}: <strong>{result.structure_design.type}</strong>
                             </p>
                             <p>
-                                Size: <strong>{result.structure_design.recommended_size}</strong>
+                                {t('size')}: <strong>{result.structure_design.recommended_size}</strong>
                             </p>
                         </div>
                     
                         <div className="result-card">
-                            <h3>Cost-Benefit Analysis</h3>
+                            <h3>{t('costBenefitAnalysisTitle')}</h3>
                             <p>
-                                Installation Cost: <strong>₹{result.cost_benefit.installation_cost.toLocaleString()}</strong>
+                                {t('installationCost')}: <strong>₹{result.cost_benefit.installation_cost.toLocaleString()}</strong>
                             </p>
                             <p>
-                                Annual Savings: <strong>₹{result.cost_benefit.annual_savings.toLocaleString()}</strong>
+                                {t('annualSavings')}: <strong>₹{result.cost_benefit.annual_savings.toLocaleString()}</strong>
                             </p>
                             <p>
-                                Payback Period: <strong>{result.cost_benefit.payback_period} years</strong>
+                                {t('paybackPeriod')}: <strong>{result.cost_benefit.payback_period} {t('years')}</strong>
                             </p>
                         </div>
                     
                         <div className='w-full flex justify-center items-center'>
-                            <button className='text-white rounded-md p-4 border-accent border mx-auto' onClick={() => setResult(null)}>Start Over</button>
+                            <button className='text-white rounded-md p-4 border-accent border mx-auto' onClick={() => setResult(null)}>{t('startOver')}</button>
                         </div>
                     </div>
                 )}
             </div>
-        </div>
+            </div>
+        </>
     );
 }
 
