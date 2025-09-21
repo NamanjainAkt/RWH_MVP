@@ -16,6 +16,12 @@ const Header = () => {
     { href: '#impact', label: t('impact') },
   ];
 
+  const dashboardLinks = [
+    { to: '/vendor-dashboard', label: 'Vendor Dashboard' },
+    { to: '/municipal-dashboard', label: 'Municipal Dashboard' },
+    { to: '/calculator', label: 'Calculator' }
+  ];
+
   const toggleLanguage = () => {
     setLanguage(language === 'en' ? 'hi' : 'en');
   };
@@ -49,6 +55,15 @@ const Header = () => {
               >
                 {link.label}
               </a>
+            ))}
+            {dashboardLinks.map((link) => (
+              <Link
+                key={link.to}
+                to={link.to}
+                className="text-white hover:text-primary transition-colors duration-300"
+              >
+                {link.label}
+              </Link>
             ))}
           </nav>
           <div className="hidden md:flex items-center gap-4">
@@ -102,6 +117,16 @@ const Header = () => {
                   >
                     {link.label}
                   </a>
+                ))}
+                {dashboardLinks.map((link) => (
+                  <Link
+                    key={link.to}
+                    to={link.to}
+                    className="text-text-secondary hover:text-primary transition-colors duration-300 py-2"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    {link.label}
+                  </Link>
                 ))}
                 <button
                   onClick={toggleLanguage}
